@@ -10,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,7 +49,9 @@ public class User implements UserDetails {
     private String profilePic;
     private String phoneNumber;
 
-    private boolean enabled=true;
+    @Getter(value = AccessLevel.NONE)
+
+    private boolean enabled=false;
     private boolean emailVarified=false;
     private boolean phoneVarified=false;
 
@@ -57,11 +60,13 @@ public class User implements UserDetails {
     private String providerUserId;
 
     @OneToMany(mappedBy = "user" , cascade=CascadeType.ALL,fetch=FetchType.LAZY, orphanRemoval = true)
-    private List<Contact>contacts=new ArrayList<>();
+    private List<Contact> contacts=new ArrayList<>();
 
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roleList = new ArrayList<>();
+
+    private String emailToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -102,6 +107,8 @@ public class User implements UserDetails {
     public boolean isEnabled(){
         return this.enabled;
     }
+
+    @Override
     public String getPassword(){
         return this.password;
     }

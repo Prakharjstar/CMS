@@ -21,7 +21,7 @@ import lombok.Setter;
 public class SocialLink {
     @Id
    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String link;
     private String title;
 @ManyToOne

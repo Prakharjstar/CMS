@@ -50,16 +50,21 @@ public class PageController {
         System.out.println("This is about page");
         return "about";
     }
-    @RequestMapping("/service")
+    @RequestMapping("/services")
     public String service(){
         System.out.println("This is service page");
         return "services";
     }
-    @RequestMapping("/contact")
+    @RequestMapping("/contacts")
     public String contact(){
         
-        return new String("contact");
+        return "contacts";
     }
+
+
+
+    // this is showing login page
+
    @RequestMapping("/login")
     public String login(){
         System.out.println("This is service page");
@@ -67,7 +72,8 @@ public class PageController {
     }
 
     
-    @RequestMapping("/signup")
+    //  registration page
+    @RequestMapping("/register")
     public String register(Model model){
         UserForm userform= new UserForm();
       
@@ -77,6 +83,8 @@ public class PageController {
     }
 
 
+
+     // for processing registration
     @RequestMapping(value="/do-register",method=RequestMethod.POST)
     public String processRegister( @Valid @ModelAttribute UserForm userForm , BindingResult rBindingResult, HttpSession session){
         System.out.println("Processing registration");
