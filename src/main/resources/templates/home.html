@@ -6,8 +6,49 @@
 <body>
    
     <div id = "content">
-        <h1 class ="text-5xl">Welcome to Home Page</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente ratione rem suscipit quos voluptates animi accusantium hic aspernatur voluptate eaque.</p>
+        <!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-gray-700 dark:text-white py-24 px-6 text-center">
+  <h1 class="text-5xl font-bold mb-4">Welcome to Contact Manager</h1>
+  <p class="text-lg max-w-2xl mx-auto mb-8">
+    Organize, access, and manage your contacts effortlessly with our secure and user-friendly platform.
+  </p>
+  <a href="/user/dashboard" class="bg-white text-blue-700 px-6 py-3 font-semibold rounded-full shadow hover:bg-gray-100 transition">
+    Go to Dashboard
+  </a>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 px-6 bg-gray-100 dark:bg-gray-900 dark:text-white">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-12">Why Use Our CMS?</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">All Contacts in One Place</h3>
+        <p>Keep track of all your personal and professional contacts in a centralized, searchable system.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Secure & Private</h3>
+        <p>Powered by Spring Security and OAuth, your data stays encrypted and protected at all times.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Dark/Light Mode</h3>
+        <p>Switch seamlessly between light and dark modes to match your preference.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="text-center py-16 bg-white dark:bg-gray-800">
+  <h2 class="text-3xl font-bold mb-4">Ready to simplify your contacts?</h2>
+  <p class="mb-6">Join now and start organizing smarter, faster, and safer.</p>
+  <a data-th-href="@{'/register'}" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Get Started</a>
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-sm text-gray-500 dark:text-gray-400 py-6">
+  &copy; 2025 Contact Management System. Made with ❤️ using Spring Boot & Tailwind CSS.
+</footer>
 
 
 

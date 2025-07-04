@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
 <head>
-   <title >Dashboard Page </title>
+  <title>Dashboard Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
 </head>
-<body>
-   <div id = "content">
+<body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+  <div id="content">
 
-    <!--sidebar-->
-
+    <!-- Sidebar -->
     <div th:if="${loggedinUser}">
-        <div data-th-replace="~{user/sidebar::sidebar}"></div>
+      <div data-th-replace="~{user/sidebar::sidebar}"></div>
     </div>
 
+    <!-- Main Dashboard Content -->
+    <div class="sm:pl-64 pt-28 min-h-screen flex justify-center items-start px-4">
+      <div class="bg-white/80 dark:bg-white/10 backdrop-blur-lg border border-gray-200 dark:border-white/20 p-12 rounded-3xl shadow-2xl w-full max-w-6xl text-center">
 
-    <div  class="sm:pl-64 pt-20" style="height: 1000px">
-        <div class="fles justify-center flex-col items-center">
-         <h1 class ="text-5xl">Welcome to Dashboard Page </h1>
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente ratione rem suscipit quos voluptates animi accusantium hic aspernatur voluptate eaque.</p>
- 
+        <!-- Title -->
+        <h1 class="text-5xl font-bold mb-6 text-gray-900 dark:text-white">Welcome to Your Dashboard</h1>
+
+        <!-- Description -->
+        <p class="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
+          You can start managing your contacts here. Use the sidebar to
+          <span class="font-semibold text-blue-700 dark:text-blue-400">add, view, or organize</span> your contact list easily.
+        </p>
+
+        <!-- Feature Cards -->
+        <div class="grid sm:grid-cols-3 gap-8 text-left">
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+            <h3 class="font-semibold text-lg mb-2">➕ Add Contacts</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Click "Add Contact" in the sidebar to save new people.</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+            <h3 class="font-semibold text-lg mb-2">⭐ Mark Favourites</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Highlight important contacts for quick access.</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+            <h3 class="font-semibold text-lg mb-2">🔍 Search Quickly</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Use search to instantly find any contact.</p>
+          </div>
         </div>
-     </div>
-   </div>
+
+      </div>
+    </div>
+
     <script>
-        console.log("This is Dashboard page");
+      console.log("This is Dashboard page");
     </script>
+  </div>
 </body>
 </html>

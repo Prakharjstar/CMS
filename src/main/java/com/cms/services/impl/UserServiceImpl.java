@@ -13,7 +13,7 @@ import org.springframework.web.client.ResourceAccessException;
 
 import com.cms.entities.User;
 import com.cms.helper.AppConstants;
-import com.cms.helper.ResourceNotFoundException;
+
 import com.cms.repositories.UserRepo;
 import com.cms.services.UserService;
 

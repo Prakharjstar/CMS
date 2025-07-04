@@ -5,6 +5,8 @@ import com.cms.entities.User;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 public interface ContactService {
     //save Contacts
     Contact save (Contact contact);
@@ -23,12 +25,15 @@ public interface ContactService {
     void delete(String id);
 
     //search Contact
-    List<Contact> search(String name, String email , String phoneNumber );
+    Page<Contact> searchByName(String namekeyword, int size , int page , String sortBy, String order,User user );
 
+   Page<Contact> searchByEmail(String emailKeyword , int size , int page , String sortBy , String order,User user);
+
+    Page<Contact> SearchByPhoneNumber(String phoneNumberKeyword , int size , int page , String sortBy , String order,User user);
     //get contacts by userId
 
     List<Contact> getByUserId(String userId);
     
-    List<Contact> getByUser(User user);
+    Page<Contact> getByUser(User user , int page , int size ,  String sortField ,  String sortDirection);
 
 }

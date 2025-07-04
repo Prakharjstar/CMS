@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cms.entities.Contact;
@@ -31,7 +34,23 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact update(Contact contact) {
        
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
+       var contactOld = contactRepo.findById(contact.getId())
+       .orElseThrow(()-> new ResourceNotFoundException("Contact Not Found"));
+       contactOld.setName(contact.getName());
+       contactOld.setEmail(contact.getEmail());
+       contactOld.setPhoneNumber(contact.getPhoneNumber());
+       contactOld.setAddress(contact.getAddress());
+       contactOld.setDescription(contact.getDescription());
+       contactOld.setPicture(contact.getPicture());
+       contactOld.setFavourite(contact.isFavourite());
+       contactOld.setCloudinaryImagePublicld(contact.getCloudinaryImagePublicld());
+       contactOld.setWebsiteLink(contact.getWebsiteLink());
+       contactOld.setLinkedInLink(contact.getLinkedInLink());
+     
+
+       return contactRepo.save(contactOld);
+
+
     
 
 
@@ -46,21 +65,18 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact getById(String id) {
         return contactRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Contact not found with givrn id" + id));
-       
-       
+               
+              
     }
-
-    @Override
+             
+    @Override                     
     public void delete(String id) {
+    
         var contact = contactRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Contact not found with givrn id" + id));
        contactRepo.delete(contact);
     }
-
-    @Override
-    public List<Contact> search(String name, String email, String phoneNumber) {
-       
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
-    }
+                          
+    
 
     @Override
     public List<Contact> getByUserId(String userId) {
@@ -70,10 +86,49 @@ public class ContactServiceImpl implements ContactService {
 
 
 
+    
+
+
     @Override
-    public List<Contact> getByUser(User user) {
-      return contactRepo.findByUser(user);
+    public Page<Contact> getByUser(User user, int page, int size , String sortBy , String direction) {
+        Sort sort = direction.equals("desc")? Sort.by(sortBy).descending() :Sort.by(sortBy).ascending();
+        var pageable = PageRequest.of(page, size , sort);
+    
+      return contactRepo.findByUser(user , pageable);
     
     }
 
+
+
+    @Override
+    public Page<Contact> searchByName(String nameKeyword, int size, int page, String sortBy, String order ,User user) {
+      var pageable = PageRequest.of(page, size ,Sort.by(sortBy));
+      Sort sort = order.equals("desc") ? Sort.by(sortBy).descending(): Sort.by(sortBy).ascending();   
+       return  contactRepo.findByUserAndNameContaining(user,nameKeyword , pageable);
+    }
+
+
+
+    @Override
+    public Page<Contact> searchByEmail(String emailKeyword, int size, int page, String sortBy, String order ,User user) {
+       var pageable = PageRequest.of(page, size ,Sort.by(sortBy));
+      Sort sort = order.equals("desc") ? Sort.by(sortBy).descending(): Sort.by(sortBy).ascending();   
+       return  contactRepo.findByUserAndEmailContaining(user,emailKeyword , pageable);
+    }
+
+
+
+    @Override
+    public Page<Contact> SearchByPhoneNumber(String phoneNumberKeyword, int size, int page, String sortBy,
+            String order ,User user) {
+        var pageable = PageRequest.of(page, size ,Sort.by(sortBy));
+      Sort sort = order.equals("desc") ? Sort.by(sortBy).descending(): Sort.by(sortBy).ascending();   
+       return  contactRepo.findByUserAndPhoneNumberContaining(user,phoneNumberKeyword , pageable);
+
+
+
+  
+
+   
+}
 }

@@ -98,12 +98,12 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
                 String email =oauthUser.getAttribute("email")!=null ?
                 oauthUser.getAttribute("email").toString():oauthUser.getAttribute("login").toString()+"@gmail.com";
 
-                String picuture = oauthUser.getAttribute("avatar_url").toString();
+                String picture = oauthUser.getAttribute("avatar_url").toString();
                 String name = oauthUser.getAttribute("login").toString();
                 String providerUserId = oauthUser.getName();
 
                 user.setEmail(email);
-                user.setProfilePic(picuture);
+                user.setProfilePic(picture);
                 user.setName(name);
                 user.setProviderUserId(providerUserId);
                 user.setProvider(Providers.GITHUB);

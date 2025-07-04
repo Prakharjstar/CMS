@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
 <head>
-   <title>About Page</title>
+  <title>About Page</title>
 </head>
 <body>
-   
-    <div id = "content">
-        <h1 class = "text-5xl">Welcome to About Page</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente ratione rem suscipit quos voluptates animi accusantium hic aspernatur voluptate eaque.</p>
+
+  <div id="content" class="min-h-screen flex justify-center bg-gray-100 dark:bg-gray-500  px-4 pt-20">
+    <div class="bg-white dark:bg-gray-700  shadow-lg p-8 max-w-5xl w-full">
+      <h1 class="text-5xl font-bold text-blue-700 mb-6">About Our Contact Management System</h1>
+
+      <p class="text-lg mb-4">
+        Our Contact Management System (CMS) is a web-based application built to help users efficiently manage their personal or professional contacts. It provides a secure, organized, and user-friendly platform to store, view, edit, and categorize contact details.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-blue-600 mt-6 mb-2">📌 Key Features</h2>
+      <p class="text-base mb-1">• Create, edit, and delete contacts</p>
+      <p class="text-base mb-1">• Group-based contact organization</p>
+      <p class="text-base mb-1">• Profile image uploads using Cloudinary</p>
+      <p class="text-base mb-1">• Dark/Light theme toggle</p>
+      <p class="text-base mb-1">• Secure login with Spring Security & OAuth</p>
+      <p class="text-base mb-4">• Responsive and elegant UI using Tailwind CSS</p>
+
+      <h2 class="text-2xl font-semibold text-blue-600 mt-6 mb-2">🛠 Tech Stack</h2>
+      <p class="text-base mb-1">• Spring Boot, Java, Hibernate</p>
+      <p class="text-base mb-1">• MySQL database</p>
+      <p class="text-base mb-1">• Tailwind CSS, HTML5, Thymeleaf</p>
+      <p class="text-base mb-1">• AJAX, Google Cloud Console, Cloudinary</p>
+      <p class="text-base mb-4">• Spring Security, OAuth2 authentication</p>
+
+      <h2 class="text-2xl font-semibold text-blue-600 mt-6 mb-2">👨‍💻 About the Developer</h2>
+      <p class="text-base mb-2">
+        I’m <strong>Prakhar</strong>, a B.Tech CSE student at <strong>Birla Institute of Applied Sciences</strong>. I love programming, travelling, and playing musical instruments. This project helped me learn backend development, cloud integration, and building secure, real-world applications.
+      </p>
+
+      <p class="text-base mt-4 text-gray-700 italic">
+        “This Contact Management System project was a great challenge and learning experience. It taught me the importance of clean design, security, and user experience.”
+      </p>
     </div>
-    <script>
-        console.log("About Page");
-    </script>
+  </div>
+
+  <script>
+    console.log("About Page");
+  </script>
 </body>
 </html>

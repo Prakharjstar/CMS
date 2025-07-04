@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
 <head>
-   <title >All Your Contacts </title>
+   <title >Search contacts </title>
 </head>
 <body>
    <div id = "content">
@@ -14,25 +14,34 @@
 
 
     <div  class="sm:pl-64 pt-20" style="height: 1000px">
+        <div class="fles justify-center flex-col items-center">
+         <h1 class ="text-5xl"> Search Results </h1>
+         <p  class= "text-green-600" data-th-text="${pageContact.totalElements}+' result found'"></p>
+ 
+        </div>
+ <div  class="sm:pl-64 pt-20" style="height: 1000px">
         <div class="">
          <h1 class ="text-5xl">Welcome to Contacts page </h1>
          <p >Here is list of your all contacts</p>
          <div class="p-4">
-            <div class=" space-y-3 w-1/2 mx-auto min-h-[50vh]">
+            <div class="w-1/2 mx-auto min-h-[50vh]">
               <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <!-- Your table here -->
                  
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div data-th-replace="~{message :: messagebox}"></div>
-    <form data-th-object="${contactSearchForm}" data-th-action="@{'/user/contacts/search'}">
+    <form
+    data-th-object="${contactSearchForm}"
+    action="" data-th-action="@{'/user/contacts/search'}">
         <div
      class="flex items-center space-x-3 justify-start flex-column md:flex-row flex-wrap space-y-4 md:space-y-3  py-2 bg-orange-300 dark:bg-gray-900">
          
         <!--select box-->
 
 <div class="space-x-1"> <label for="countries_disabled" class="block mb-2 space-x-1 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-  <select data-th-field= "*{field}" id="countries_disabled" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    <option selected value="">Select Filed</option>
+  <select
+   data-th-field="*{field}"
+   id="countries_disabled" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option selected value="">Select Field</option>
     <option value="name">Name</option>
     <option value="phone">Phone</option>
     <option value="email">Email</option>
@@ -47,10 +56,11 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input data-th-field="*{value}" type="text" id="table-search-users" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+            <input
+            data-th-field="*{value}"
+              type="text" id="table-search-users" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
         </div>
-        
-        <button tye="Submit" class="px-3 py-2 bg-gray-800 text-white">
+        <button type="Submit" class="px-3 py-2 bg-gray-800 text-white">
           Search
         </button>
     </div>
@@ -110,19 +120,11 @@
                   
                     <!-- Action Icons -->
                     <div>
-                  <!-- <a data-th-href="@{'/user/contacts/delete/'+*{id}}" class=" p-2 "> <i class="fa-solid  fa-trash"></i> </a> --> 
-
-                      <!--Delete contact-->
-                  <button th:data-id="${c.id}" th:onclick="deleteContact(this.getAttribute('data-id'))">
-                     <i class="fa-solid  fa-trash"></i> </button>
-                  
-                  <!--Update Contact-->
-                  <a data-th-href="@{'/user/contacts/view/'+*{id}}" >
-                     <i class="fa-solid fa-pen"></i></a>
-
-                     <!--View contact-->
-                     <button th:data-id="${c.id}" th:onclick = "loadContactdata(this.getAttribute('data-id'))">
-                        <i class="fa-solid fa-eye"></i> </button>
+                   <a href="" class=" p-2 "> <i class="fa-solid  fa-trash"></i> </a> 
+                     <a href="" class=" p-2"> <i class="fa-solid fa-pen"></i></a>
+                     <button onclick="loadContactdata('[[${c.id}]]')"><i class="fa-solid fa-eye"></i> 
+                    </button>
+                    </div>
                     
                 </td>
             </tr>
@@ -139,15 +141,15 @@
   <ul class="flex items-center -space-x-px h-10 text-base">
     <li data-th-unless = "${pageContact.first}">
       <a 
-      data-th-href="@{'/user/contacts?size='+${pageSize}+'&page=' + ${pageContact.number-1}}"
+      data-th-href="@{'/user/contacts/search?size='+${pageSize}+'&page=' + ${pageContact.number-1}+'&field='+${contactSearchForm.field}+'&value='+${contactSearchForm.value}+'}"
       href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
         Previous
                                      
       </a>
     </li>
-    <li data-th-each="index: ${#numbers.sequence(0,pageContact.totalPages -1)}">
+    <li data-th-each="index: ${#numbers.sequence(0,pageContact.totalPages -1)+'&field='+${contactSearchForm.field}+'&value='+{contactSearchForm.value}+'}">
       <a
-      data-th-href = "@{'/user/contacts?size='+${pageSize}+'&page='+${index}}"
+      data-th-href = "@{'/user/contacts/search?size='+${pageSize}+'&page='+${index}+'&field='+${contactSearchForm.field}+'&value='+${contactSearchForm.value}+'}"
  
       href="#" 
       data-th-classappend="${index==pageContact.number? 'bg-blue-50 dark:bg-gray-600':'bg-white dark:bg-gray-800'}"
@@ -156,7 +158,7 @@
    
     <li data-th-unless ="${pageContact.last}">
       <a
-      data-th-href="@{'/user/contacts?size='+${pageSize}+'&page=' + ${pageContact.number+1}}"
+      data-th-href="@{'/user/contacts/search?size='+${pageSize}+'&page=' + ${pageContact.number+1}+'&field='+${contactSearchForm.field}+'&value='+${contactSearchForm.value}+'}"
       href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
        Next
        
@@ -165,7 +167,8 @@
   </ul>
 </nav>
     </div>
-     <h1 class="text-5xl text-center bg-white p-4" data-th-if="${pageContact.totalElements<=0}">No Result Found</h1>
+
+    <h1 class="text-5xl text-center bg-white p-4" data-th-if="${pageContact.totalElements<=0}">No Result Found</h1>
     <!-- Edit user modal -->
     <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
@@ -218,42 +221,29 @@
                             <label for="new-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Password</label>
                             <input type="password" name="new-password" id="new-password" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
                         </div>
-                         
                     </div>
-                  
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                  
-                  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
-                 
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
                 </div>
-                 
             </form>
         </div>
-
     </div>
-    
-
 </div>
 
-
               </div>
-               <div  data-th-replace="~{user/contact_modals :: contact}"></div>
-              
             </div>
-           
-           
           </div>
              
         </div>
-          
      </div>
-   
+        <div data-th-replace="~{user/contact_modals :: contact}"></div>
+     </div>
    </div>
-   
-    <script data-th-src="@{'/js/contacts.js'}">
-        console.log("This is Dashboard page");
+   <script data-th-src="@{'/js/contacts.js'}"></script>
+    <script>
+        console.log("Search");
     </script>
 </body>
 </html>

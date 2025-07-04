@@ -30,14 +30,15 @@ public class UserController{
 
     
     //User Dashboard page
-                                                                                                                                              
+                                                                                                                       
 
-     @RequestMapping(value = "/dashboard")
-    public String userDashboard(){
-        System.out.println("User Dashboard");
+      @RequestMapping("/dashboard")
+    public String userDashboard(Model model, Authentication authentication) {
+        String username = Helper.getEmailOfLoggedInUser(authentication);
+        User user = userService.getUserByEmail(username);
+        model.addAttribute("loggedinUser", user);
         return "user/dashboard";
-
-               }
+    }
  
 
     //user Profile page

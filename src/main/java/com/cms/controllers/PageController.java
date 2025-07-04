@@ -31,6 +31,7 @@ public class PageController {
     @RequestMapping("/home")
     public String home(Model model){
         System.out.println("This is Home Page");
+    
 
     //Sending data to view
     
@@ -55,10 +56,10 @@ public class PageController {
         System.out.println("This is service page");
         return "services";
     }
-    @RequestMapping("/contacts")
+    @RequestMapping("/contact")
     public String contact(){
         
-        return "contacts";
+        return "contact";
     }
 
 
@@ -120,7 +121,7 @@ public class PageController {
         // add a message
         Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
         session.setAttribute("message", message);
-        return "redirect:/signup";
+        return "redirect:/register";
 
 
 
